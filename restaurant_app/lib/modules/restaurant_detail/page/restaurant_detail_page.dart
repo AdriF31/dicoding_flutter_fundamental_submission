@@ -155,13 +155,13 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage>
                              Tab(
                               child: Text(
                                 'Makanan',
-                                style: text16PW500,
+                                style: text16PW700,
                               ),
                             ),
                             Tab(
                               child: Text(
                                 'Minuman',
-                                style: text16PW500,
+                                style: text16PW700,
                               ),
                             ),
                           ]),
