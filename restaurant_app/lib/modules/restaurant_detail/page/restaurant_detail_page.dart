@@ -36,7 +36,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage>
       body: NestedScrollView(
           headerSliverBuilder: (context, isScroll) {
             return <Widget>[
-              SliverAppBar(
+              const SliverAppBar(
                 pinned: true,
                 title: Text("Detail Restoran"),
                 centerTitle: true,
@@ -71,7 +71,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage>
                                     child: ShimmerEffect(),
                                   ),
                                   errorWidget: (context, url, error) =>
-                                      Icon(Icons.image_not_supported),
+                                      const Icon(Icons.image_not_supported),
                                 ),
                               ),
                             ),
@@ -91,7 +91,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage>
                                 const SizedBox(height: 8.0,),
                                 Row(
                                   children: [
-                                    Icon(Icons.pin_drop_outlined,color: primary,size: 16,),
+                                    const Icon(Icons.pin_drop_outlined,color: primary,size: 16,),
                                     const SizedBox(width: 8.0,),
                                     Text(
                                       widget.data.restaurants[widget.index].city ,
@@ -108,7 +108,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage>
                                               .data
                                               .restaurants[widget.index]
                                               .rating,
-                                      itemBuilder: (context, index) => Icon(
+                                      itemBuilder: (context, index) => const Icon(
                                         Icons.star,
                                         color: Colors.amber,
                                       ),
@@ -151,8 +151,8 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage>
                           controller: _controller,
                           indicatorColor: primary,
                           labelStyle: text14PW700,
-                          tabs: [
-                            Tab(
+                          tabs: const [
+                             Tab(
                               child: Text(
                                 'Makanan',
                                 style: text16PW500,
@@ -173,7 +173,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage>
             controller: _controller,
             children: [
               SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -189,7 +189,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage>
                 ),
               ),
               SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
