@@ -5,10 +5,14 @@ import 'package:restaurant_app/modules/restaurant_list/page/restaurant_list_view
 
 class RestaurantListPage extends StatelessWidget {
   static const routeName = "/restaurant_list";
+
   const RestaurantListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context)=>RestaurantCubit()..getRestaurant(),child: RestaurantListView(),);
+    return BlocProvider(
+      create: (context) => RestaurantCubit()..getRestaurant(),
+      child: RestaurantListView(),
+    );
   }
 }

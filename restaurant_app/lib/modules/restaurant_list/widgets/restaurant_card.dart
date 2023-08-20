@@ -6,8 +6,8 @@ import 'package:restaurant_app/utils/shimmer_effect.dart';
 import '../../../utils/theme/theme.dart';
 
 class RestaurantCard extends StatelessWidget {
-  const RestaurantCard({Key? key,required this.imageUrl,required this.name,required this.address, required this.rating,required this.onTap}) : super(key: key);
-  final String? imageUrl;
+  const RestaurantCard({Key? key,required this.pictureId,required this.name,required this.address, required this.rating,required this.onTap}) : super(key: key);
+  final String? pictureId;
   final String? name;
   final String? address;
   final double? rating;
@@ -33,7 +33,7 @@ class RestaurantCard extends StatelessWidget {
                 tag: name??"",
                 child: CachedNetworkImage(
                   imageUrl:
-                      imageUrl??"https://",
+                      "https://restaurant-api.dicoding.dev/images/small/$pictureId",
                   height: 100,
                   width: 100,
                   fit: BoxFit.cover,

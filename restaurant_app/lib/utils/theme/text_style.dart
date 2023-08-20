@@ -49,3 +49,10 @@ const text16PW700 = TextStyle(
   fontWeight: FontWeight.w700,
   fontSize: 16,
 );
+
+const text16W400 = TextStyle(
+  fontFamily: 'Nunito',
+  color: white,
+  fontWeight: FontWeight.w400,
+  fontSize: 16,
+);

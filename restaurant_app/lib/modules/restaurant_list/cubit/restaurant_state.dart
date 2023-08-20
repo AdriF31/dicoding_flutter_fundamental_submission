@@ -11,7 +11,7 @@ class RestaurantListInitial extends RestaurantListState {}
 class OnLoadingGetRestaurant extends RestaurantListState {}
 
 class OnSuccessGetRestaurant extends RestaurantListState {
-  final RestaurantModel? data;
+  final List<Restaurant?> data;
   OnSuccessGetRestaurant({required this.data});
   @override
   List<Object?> get props => [data];
