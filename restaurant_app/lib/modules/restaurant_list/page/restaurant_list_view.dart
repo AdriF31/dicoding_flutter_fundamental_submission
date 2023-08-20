@@ -7,7 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:restaurant_app/modules/restaurant_detail/page/restaurant_detail_page.dart';
 import 'package:restaurant_app/modules/restaurant_list/cubit/restaurant_cubit.dart';
 import 'package:restaurant_app/modules/restaurant_list/widgets/restaurant_card.dart';
-import 'package:restaurant_app/utils/sliver_appbar_delegate.dart';
 
 import '../../../utils/theme/theme.dart';
 
@@ -32,7 +31,7 @@ class RestaurantListView extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state is OnSuccessGetRestaurant && state.data.isNotEmpty) {
+          if (state is OnSuccessGetRestaurant) {
             var data = state.data;
             return Padding(
               padding: const EdgeInsets.all(16.0),
@@ -59,12 +58,12 @@ class RestaurantListView extends StatelessWidget {
                         filled: true,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
-                        suffixIcon: Icon(Icons.search)),
+                        suffixIcon: const Icon(Icons.search)),
                     textInputAction: TextInputAction.done,
                     textCapitalization: TextCapitalization.words,
                     keyboardType: TextInputType.text,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16.0,
                   ),
                   state.data.isNotEmpty
@@ -89,9 +88,16 @@ class RestaurantListView extends StatelessWidget {
                                         rating: data[index]?.rating))),
                           ),
                         )
-                      : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text("Data tidak ditemukan", style: text16PW400,)],
+                      : const Expanded(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Data tidak ditemukan",
+                                style: text16PW400,
+                              )
+                            ],
+                          ),
                       ),
                 ],
               ),

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:restaurant_app/data/model/post_review_model.dart';
@@ -7,7 +6,6 @@ import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
 import 'package:restaurant_app/data/model/restaurant_list_model.dart';
 import 'package:restaurant_app/data/network.dart';
 import 'package:restaurant_app/data/repository/repository.dart';
-import 'package:restaurant_app/utils/get_json.dart';
 
 class RepositoryImpl implements Repository{
   Network network = Network();

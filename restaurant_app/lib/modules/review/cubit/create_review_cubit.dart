@@ -1,8 +1,6 @@
-import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
 import 'package:restaurant_app/data/model/post_review_model.dart';
 import 'package:restaurant_app/data/repository/repository_impl.dart';
 

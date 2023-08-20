@@ -212,8 +212,9 @@ class _RestaurantDetailViewState extends State<RestaurantDetailView>
                                                                         (index) =>
                                                                             ListTile(
                                                                               title: Text(state.data?.restaurant?.customerReviews?[index].name ?? ""),
-                                                                              subtitle: Text(state.data?.restaurant?.customerReviews?[index].review ?? ""),
+                                                                              subtitle: Text(state.data?.restaurant?.customerReviews?[index].review ?? "",maxLines: 2,overflow: TextOverflow.ellipsis),
                                                                               leading: const CircleAvatar(
+                                                                                backgroundColor: primary,
                                                                                 child: Icon(Icons.person),
                                                                               ),
                                                                             ))),
