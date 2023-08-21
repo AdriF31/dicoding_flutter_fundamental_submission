@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:restaurant_app/modules/restaurant_detail/page/restaurant_detail_page.dart';
 import 'package:restaurant_app/modules/restaurant_list/cubit/restaurant_cubit.dart';
 import 'package:restaurant_app/modules/restaurant_list/widgets/restaurant_card.dart';
+import 'package:restaurant_app/utils/widgets/elevated_button_widget.dart';
 
 import '../../../utils/theme/theme.dart';
 
@@ -35,70 +36,99 @@ class RestaurantListView extends StatelessWidget {
             var data = state.data;
             return Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: controller,
-                    cursorColor: Colors.blue,
-                    onChanged: (value) {
-                      if (_debounce?.isActive ?? false) _debounce!.cancel();
-                      _debounce = Timer(const Duration(seconds: 1), () {
-                        if (value.isNotEmpty) {
-                          context
-                              .read<RestaurantCubit>()
-                              .searchRestaurant(query: value);
-                        } else {
-                          context.read<RestaurantCubit>().getRestaurant();
-                        }
-                      });
-                    },
-                    decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        hintText: 'Cari Restoran',
-                        filled: true,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        suffixIcon: const Icon(Icons.search)),
-                    textInputAction: TextInputAction.done,
-                    textCapitalization: TextCapitalization.words,
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  state.data.isNotEmpty
-                      ? Expanded(
-                          child: SingleChildScrollView(
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  context.read<RestaurantCubit>().getRestaurant();
+                },
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: controller,
+                      cursorColor: Colors.blue,
+                      onChanged: (value) {
+                        if (_debounce?.isActive ?? false) _debounce!.cancel();
+                        _debounce = Timer(const Duration(seconds: 1), () {
+                          if (value.isNotEmpty) {
+                            context
+                                .read<RestaurantCubit>()
+                                .searchRestaurant(query: value);
+                          } else {
+                            context.read<RestaurantCubit>().getRestaurant();
+                          }
+                        });
+                      },
+                      decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          hintText: 'Cari Restoran',
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          suffixIcon: const Icon(Icons.search)),
+                      textInputAction: TextInputAction.done,
+                      textCapitalization: TextCapitalization.words,
+                      keyboardType: TextInputType.text,
+                    ),
+                    const SizedBox(
+                      height: 16.0,
+                    ),
+                    state.data.isNotEmpty
+                        ? Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                  children: List.generate(
+                                      data.length,
+                                      (index) => RestaurantCard(
+                                          onTap: () => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      RestaurantDetailPage(
+                                                        id: state.data[index]
+                                                                ?.id ??
+                                                            "",
+                                                      ))),
+                                          pictureId: data[index]?.pictureId,
+                                          name: data[index]?.name,
+                                          address: data[index]?.city,
+                                          rating: data[index]?.rating))),
+                            ),
+                          )
+                        : const Expanded(
                             child: Column(
-                                children: List.generate(
-                                    data.length,
-                                    (index) => RestaurantCard(
-                                        onTap: () => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    RestaurantDetailPage(
-                                                      id: state.data[index]
-                                                              ?.id ??
-                                                          "",
-                                                    ))),
-                                        pictureId: data[index]?.pictureId,
-                                        name: data[index]?.name,
-                                        address: data[index]?.city,
-                                        rating: data[index]?.rating))),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Data tidak ditemukan",
+                                  style: text16PW400,
+                                )
+                              ],
+                            ),
                           ),
-                        )
-                      : const Expanded(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Data tidak ditemukan",
-                                style: text16PW400,
-                              )
-                            ],
-                          ),
-                      ),
+                  ],
+                ),
+              ),
+            );
+          }
+          if (state is OnFailedGetRestaurant) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    state.message ?? "",
+                    style: text16PW400,
+                  ),
+                  SizedBox(height: 8,),
+                  ElevatedButtonWidget(
+                    buttonText: "Refresh",
+                    fitWidth: true,
+                    buttonHeight: 30,
+                    buttonColor: primary,
+                    onPressed: (){
+                      context.read<RestaurantCubit>().getRestaurant();
+                      controller.clear();
+                    },
+                  ),
                 ],
               ),
             );

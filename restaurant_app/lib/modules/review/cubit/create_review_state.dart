@@ -18,8 +18,8 @@ class OnSuccessPostReview extends CreateReviewState {
 }
 
 class OnFailedPostReview extends CreateReviewState {
-  PostReviewModel? data;
-  OnFailedPostReview({this.data});
+  String? message;
+  OnFailedPostReview({this.message});
   @override
-  List<Object?> get props => [data];
+  List<Object?> get props => [message];
 }

@@ -8,6 +8,7 @@ import 'package:restaurant_app/modules/review/page/create_review_page.dart';
 import 'package:restaurant_app/utils/shimmer_effect.dart';
 import 'package:restaurant_app/utils/sliver_persistent_header.dart';
 import 'package:restaurant_app/utils/theme/theme.dart';
+import 'package:restaurant_app/utils/widgets/elevated_button_widget.dart';
 
 class RestaurantDetailView extends StatefulWidget {
   final String? id;
@@ -328,6 +329,29 @@ class _RestaurantDetailViewState extends State<RestaurantDetailView>
                     ),
                   ],
                 ));
+          }
+          else if(state is OnFailedGetRestaurantDetail){
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    state.message ?? "",
+                    style: text16PW400,
+                  ),
+                  SizedBox(height: 8,),
+                  ElevatedButtonWidget(
+                    buttonText: "Refresh",
+                    fitWidth: true,
+                    buttonHeight: 30,
+                    buttonColor: primary,
+                    onPressed: (){
+                      context.read<RestaurantDetailCubit>().getRestaurantDetail(id: widget.id);
+                    },
+                  ),
+                ],
+              ),
+            );
           }
           return const Center(
               child: SpinKitDualRing(

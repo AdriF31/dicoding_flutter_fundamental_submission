@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 
 class Network {
   Dio dio = Dio();
-
   Network() {
     dio.options = BaseOptions(
         baseUrl: "https://restaurant-api.dicoding.dev/",

@@ -30,7 +30,7 @@ class _CreateReviewViewState extends State<CreateReviewView> {
             Fluttertoast.showToast(msg: state.data?.message ?? "");
             Navigator.pop(context);
           } else if (state is OnFailedPostReview) {
-            Fluttertoast.showToast(msg: state.data?.message ?? "");
+            Fluttertoast.showToast(msg: state.message ?? "");
           }
         },
         child: Padding(
